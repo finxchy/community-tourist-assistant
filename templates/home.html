@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Community Tourist Assistant</title>
+</head>
+<body>
+  <h1>Community Tourist Assistant</h1>
+
+  <h2>Places</h2>
+  <ul>
+    {% for p in places %}
+      <li>
+        <strong>{{ p.name }}</strong><br>
+        {{ p.description }}
+      </li>
+    {% empty %}
+      <li>No places yet. Add some in /admin.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
