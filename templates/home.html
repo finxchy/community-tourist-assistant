@@ -1,22 +1,53 @@
+{% load static %}
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Community Tourist Assistant</title>
-</head>
-<body>
-  <h1>Community Tourist Assistant</h1>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Community Tourist Assistant</title>
 
-  <h2>Places</h2>
-  <ul>
-    {% for p in places %}
-      <li>
-        <strong>{{ p.name }}</strong><br>
-        {{ p.description }}
-      </li>
-    {% empty %}
-      <li>No places yet. Add some in /admin.</li>
-    {% endfor %}
-  </ul>
+<link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="brand">
+      Community Tourist Assistant
+    </div>
+  </div>
+</div>
+
+<div class="hero container">
+  <h1>Discover and find Local Places</h1>
+  <p class="muted">
+    Community recommended places to visit with ratings and reviews.
+  </p>
+</div>
+
+<div class="container">
+
+<h2>Places</h2>
+
+<a href="/add/" class="badge">Add a Place</a>
+
+{% for p in places %}
+<div class="card">
+<h3>
+  <a href="{% url 'place_detail' p.id %}">
+    {{ p.name }}
+  </a>
+</h3>
+<p>{{ p.description }}</p>
+</div>
+{% empty %}
+<div class="card">
+<p>No places yet. Add some in /admin.</p>
+</div>
+{% endfor %}
+
+</div>
+
 </body>
 </html>

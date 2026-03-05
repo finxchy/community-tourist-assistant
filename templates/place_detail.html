@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ place.name }} | Community Tourist Assistant</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Community Tourist Assistant</div>
+      <a class="badge" href="{% url 'home' %}">Back</a>
+    </div>
+  </div>
+
+  <main class="container hero">
+  <h1>{{ place.name }}</h1>
+  <p class="muted">{{ place.description }}</p>
+
+<div class="detail-grid">
+
+  <section class="card map-card">
+    <h2>Map</h2>
+    <div class="map-placeholder">Map goes here</div>
+  </section>
+
+  <div class="right-col">
+    <section class="card">
+      <h2>Location</h2>
+      <p class="muted">Address / town goes here.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ratings & Reviews</h2>
+      <p class="muted">Reviews and ratings go here.</p>
+    </section>
+  </div>
+
+</div>
+
+</body>
+</html>

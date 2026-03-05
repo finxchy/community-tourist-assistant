@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add a Place</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Community Tourist Assistant</div>
+      <a class="badge" href="/">Back</a>
+    </div>
+  </div>
+
+  <main class="container hero">
+    <h1>Add a New Location</h1>
+    <p class="muted">Please add a new tourist location to the community, thank you.</p>
+
+    <div class="card" style="max-width: 720px;">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Save Place</button>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>
