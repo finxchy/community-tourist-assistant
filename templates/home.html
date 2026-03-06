@@ -11,13 +11,28 @@
 
 <body>
 
+
 <div class="nav">
   <div class="container nav-inner">
     <div class="brand">
       Community Tourist Assistant
     </div>
+
+  <div>
+    {% if user.is_authenticated %}
+      <span class="muted">Logged in as {{ user.username }}</span>
+      <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="badge" style="cursor:pointer;">Logout</button>
+      </form>
+    {% else %}
+      <a class="badge" href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </div>
+
   </div>
 </div>
+
 
 <div class="hero container">
   <h1>Discover and find Local Places</h1>

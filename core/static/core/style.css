@@ -292,3 +292,9 @@ textarea {
   border-radius: 14px;
   display: block;
 }
+
+.nav-inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

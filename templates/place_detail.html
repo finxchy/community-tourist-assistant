@@ -23,7 +23,7 @@
   <div class="detail-grid">
 
   <section class="card map-card">
-    <h2>Map</h2>
+    <h2>Image</h2>
 
     <img class="map-image"
      src="{% static 'core/places/'|add:place.image_filename %}"
@@ -33,12 +33,20 @@
   <div class="right-col">
     <section class="card">
       <h2>Location</h2>
-      <p class="muted"></p>
+      <p class="muted">{{ place.town }}</p>
     </section>
 
     <section class="card">
       <h2>Ratings & Reviews</h2>
-      <p class="muted"></p>
+
+      {% for review in place.reviews.all %}
+        <div style="margin-bottom: 16px;">
+          <strong>{{ review.reviewer_name }}</strong> — {{ review.rating }}/5
+          <p class="muted">{{ review.comment }}</p>
+         </div>
+      {% empty %}
+        <p class="muted">No reviews yet.</p>
+      {% endfor %}
     </section>
   </div>
 

@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | Community Tourist Assistant</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Community Tourist Assistant</div>
+      <a class="badge" href="{% url 'home' %}">Back</a>
+    </div>
+  </div>
+
+  <main class="container hero">
+    <h1>Login</h1>
+    <p class="muted">Sign in to access your account.</p>
+
+    <div class="card" style="max-width: 500px;">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Login</button>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>
