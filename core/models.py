@@ -19,4 +19,4 @@ class Review(models.Model):
     def __str__(self):
         return f"{self.reviewer_name} - {self.place.name}"
     
-    # For update commit message
+    # For update commit message to send to GitHub
