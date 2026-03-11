@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Place(models.Model):
     name = models.CharField(max_length=200)
@@ -12,11 +13,9 @@ class Place(models.Model):
 
 class Review(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name="reviews")
-    reviewer_name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
     comment = models.TextField()
 
     def __str__(self):
-        return f"{self.reviewer_name} - {self.place.name}"
-    
-    # For update commit message to send to GitHub
+        return f"{self.user.username} - {self.place.name}"

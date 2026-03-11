@@ -17,40 +17,55 @@
   </div>
 
   <main class="container hero">
-  <h1>{{ place.name }}</h1>
-  <p class="muted">{{ place.description }}</p>
+    <h1>{{ place.name }}</h1>
+    <p class="muted">{{ place.description }}</p>
 
-  <div class="detail-grid">
+    <div class="detail-grid">
 
-  <section class="card map-card">
-    <h2>Image</h2>
+      <section class="card map-card">
+        <h2>Image</h2>
+        <img class="map-image"
+             src="{% static 'core/places/'|add:place.image_filename %}"
+             alt="{{ place.name }}">
+      </section>
 
-    <img class="map-image"
-     src="{% static 'core/places/'|add:place.image_filename %}"
-     alt="{{ place.name }}">
-  </section>
+      <div class="right-col">
+        <section class="card">
+          <h2>Location</h2>
+          <p class="muted">{{ place.town }}</p>
+        </section>
 
-  <div class="right-col">
-    <section class="card">
-      <h2>Location</h2>
-      <p class="muted">{{ place.town }}</p>
-    </section>
+        <section class="card">
+          <h2>Ratings & Reviews</h2>
 
-    <section class="card">
-      <h2>Ratings & Reviews</h2>
+          {% for review in place.reviews.all %}
+            <div style="margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <strong>{{ review.user.username }}</strong> — {{ review.rating }}/5
+              <p class="muted">{{ review.comment }}</p>
+            </div>
+          {% empty %}
+            <p class="muted">No reviews yet.</p>
+          {% endfor %}
+        </section>
 
-      {% for review in place.reviews.all %}
-        <div style="margin-bottom: 16px;">
-          <strong>{{ review.reviewer_name }}</strong> — {{ review.rating }}/5
-          <p class="muted">{{ review.comment }}</p>
-         </div>
-      {% empty %}
-        <p class="muted">No reviews yet.</p>
-      {% endfor %}
-    </section>
-  </div>
+        <section class="card">
+          <h2>Leave a Review</h2>
 
-</div>
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'add_review' place.pk %}" class="form">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="button">Submit Review</button>
+            </form>
+          {% else %}
+            <p class="muted">Log in to leave a review.</p>
+            <a class="badge" href="{% url 'login' %}">Login</a>
+          {% endif %}
+        </section>
+      </div>
+
+    </div>
+  </main>
 
 </body>
 </html>
